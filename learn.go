@@ -10,6 +10,19 @@ import (
 	"fmt"
 )
 
+// Structs
+type OpenSource struct {
+	openMR      int
+	programName string
+	projectName []string
+}
+
+// Inheritence
+type Software struct {
+	OpenSource
+	companyName string
+}
+
 // constant iota's are block specific
 const (
 	a1 = iota
@@ -99,6 +112,64 @@ func main() {
 	identityMatrix[1] = [3]int{0, 1, 0}
 	identityMatrix[2] = [3]int{0, 0, 1}
 	fmt.Println(grades, names, identityMatrix)
-	
 
+	// Map
+	gradeSheet := map[string]int{
+		"DIC": 8,
+		"WMC": 24,
+		"OFC": 24,
+	}
+	_, ok1 := gradeSheet["GMT"]
+	_, ok2 := gradeSheet["DIC"]
+	fmt.Println(ok1, ok2)
+	fmt.Println(gradeSheet["DIC"])
+	delete(gradeSheet, "DIC")
+	fmt.Println(gradeSheet["DIC"])
+
+	// Structs
+	aOpenSource := OpenSource{
+		openMR:      3,
+		programName: "Google Summer of Code",
+		projectName: []string{
+			"Qaul",
+			"Geant4",
+			"KDE Project Health",
+		},
+	}
+
+	bOpenSource := struct{ name string }{name: "Harshil Jani"}
+	fmt.Println(aOpenSource, bOpenSource)
+	fmt.Println("bfuf")
+
+	// Inheritence
+	aSoftware := Software{
+		companyName: "Meta",
+	}
+	aSoftware.openMR = 12
+	aSoftware.programName = "XROS"
+	fmt.Println(aSoftware)
+
+	// Conditionals
+	if true {
+		fmt.Println("Yes it works tho")
+	}
+
+	/*
+	   		defer : Defer is used to ensure that a function call is performed
+		   later in a program's execution, usually for purposes of cleanup.
+
+		   It works in LIFO prinicple.
+		   Expected output : [end, middle, start]
+		*/
+	defer fmt.Println("start")
+	defer fmt.Println("middle")
+	defer fmt.Println("end")
+
+	// A good snippet to learn about magic with defer.
+	magic := "start"
+	defer fmt.Println(magic)
+	magic = "end"
+	
+	// Panic
+	panic("Something bad happened")
 }
